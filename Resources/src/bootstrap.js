@@ -54,6 +54,17 @@ export default class {
   
   _onOpen(event) {
     Ti.API.info('We\'re ready!');
+    this._getUserLocation();
+  }
+  
+  async _getUserLocation() {
+    // FIXME: Current throws, work in progress!
+    const coordinates = await Ti.Geolocation.getCurrentPosition(event => {
+      return new Promise(resolve => {
+        resolve(event.coords);
+      });
+    });
+    alert(`Found location! Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}`);
   }
   
   boot() {
