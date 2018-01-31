@@ -1,4 +1,4 @@
-# Titanium ES6+ samples
+# Titanium ES6+ Sample
 
 Playing around with some ES6+ in Appcelerator Titanium.
 
