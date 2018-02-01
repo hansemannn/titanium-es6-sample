@@ -1,12 +1,14 @@
 'use strict';
 
-export default class {
+import TabGroupApplication from './tabgroup-application';
+
+export default class extends TabGroupApplication {
 
   constructor() {
-    this.tabGroup = Ti.UI.createTabGroup({
-      tabs: this._generateTabs(),
-      activeTabIconTint: '#ca2127',
-      tabsTranslucent: false
+    super();
+
+    this._generateTabs().forEach(tab => {
+      this.tabGroup.addTab(tab);
     });
 
     this.tabGroup.addEventListener('open', (event) => {
@@ -21,23 +23,7 @@ export default class {
       this._generateTab('Hyperloop', 'icon-hyperloop.png')
     ];
   }
-  
-  _generateTab(title = 'Untitled', icon = 'icon-unknown.png') {
-    return Ti.UI.createTab({
-      title: title, 
-      window: this._generateWindow(title), 
-      icon: `assets/images/${icon}`
-    });
-  }
-  
-  _generateWindow(title) {
-    return Ti.UI.createWindow({
-      backgroundColor: '#fff', 
-      title: title,
-      translucent: false
-    });
-  }
-  
+
   _fadeIn() {
     const whatDoesItDo = ['rocks!'];
     const secondArray = ['ES6+', ...whatDoesItDo];
@@ -56,8 +42,8 @@ export default class {
   }
   
   _onOpen(event) {
-    Ti.API.info('We\'re ready!');
-    
+    super._onOpen(event);
+      
     // Test ES6 number formatting
     var l10nEN = new Intl.NumberFormat('en-US');
     var l10nDE = new Intl.NumberFormat('de-DE');
@@ -91,6 +77,10 @@ export default class {
     });
   }
   
+  boot() {
+    super.boot();
+  }
+  
   // Use async/await
   // FIXME: Current throws, work in progress!
   
@@ -102,8 +92,4 @@ export default class {
   //   });
   //   alert(`Found location! Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}`);
   // }
-  
-  boot() {
-    this.tabGroup.open();
-  }
 }

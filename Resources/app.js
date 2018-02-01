@@ -1,6 +1,6 @@
 'use strict';
 
-import { default as Bootstrap } from 'src/bootstrap';
+import { default as Application } from 'src/application';
 
-const boostrap = new Bootstrap();
-boostrap.boot();
+const app = new Application();
+app.boot();

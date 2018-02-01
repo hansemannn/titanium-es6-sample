@@ -11,6 +11,7 @@ Playing around with some ES6+ in Appcelerator Titanium.
 - [x] Arrow operator
 - [x] Classes
 - [x] Constructors
+- [x] Inheritance
 - [x] import / export
 - [x] const / let variables
 - [x] Promises
