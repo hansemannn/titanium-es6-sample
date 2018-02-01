@@ -13,8 +13,10 @@ Playing around with some ES6+ in Appcelerator Titanium.
 - [x] Constructors
 - [x] import / export
 - [x] const / let variables
+- [x] Promises
+- [x] Default values
+- [x] Spread operator
 - [ ] async/await
-- [ ] More!
 
 ## License
 

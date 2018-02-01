@@ -22,7 +22,7 @@ export default class {
     ];
   }
   
-  _generateTab(title, icon) {
+  _generateTab(title = 'Untitled', icon = 'icon-unknown.png') {
     return Ti.UI.createTab({
       title: title, 
       window: this._generateWindow(title), 
@@ -39,8 +39,11 @@ export default class {
   }
   
   _fadeIn() {
+    const whatDoesItDo = ['rocks!'];
+    const secondArray = ['ES6+', ...whatDoesItDo];
+    
     const label = Ti.UI.createLabel({
-      text: 'ES6+ rocks!',
+      text: secondArray.join(' '),
       opacity: 0
     });
 
@@ -54,18 +57,51 @@ export default class {
   
   _onOpen(event) {
     Ti.API.info('We\'re ready!');
-    this._getUserLocation();
+    
+    // Test ES6 number formatting
+    var l10nEN = new Intl.NumberFormat('en-US');
+    var l10nDE = new Intl.NumberFormat('de-DE');
+    Ti.API.info(l10nEN.format(1234567.89));
+    Ti.API.info(l10nDE.format(1234567.89));
+    
+    // Test ES6 date formatting
+    var l10nEN = new Intl.DateTimeFormat('en-US');
+    var l10nDE = new Intl.DateTimeFormat('de-DE');
+    Ti.API.info(l10nEN.format(new Date("2015-01-02")));
+    Ti.API.info(l10nDE.format(new Date("2015-01-02")));
+    
+    // Get current location (asynchronous)
+    this._getUserLocation().then(coordinates => {
+      alert(`Found location!\n\nLatitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}`);
+    }).catch(error => {
+      alert(`Error receiving current location: ${error}`);
+    });
   }
-  
-  async _getUserLocation() {
-    // FIXME: Current throws, work in progress!
-    const coordinates = await Ti.Geolocation.getCurrentPosition(event => {
-      return new Promise(resolve => {
-        resolve(event.coords);
+
+  // Use Promises
+  _getUserLocation() {
+    return new Promise((resolve, reject) => {
+      Ti.Geolocation.getCurrentPosition(event => {
+        if (!event.success) {
+          reject(event.error);
+        } else {
+          resolve(event.coords);
+        }
       });
     });
-    alert(`Found location! Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}`);
   }
+  
+  // Use async/await
+  // FIXME: Current throws, work in progress!
+  
+  // async _getUserLocation() {
+  //   const coordinates = await Ti.Geolocation.getCurrentPosition(event => {
+  //     return new Promise(resolve => {
+  //       resolve(event.coords);
+  //     });
+  //   });
+  //   alert(`Found location! Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}`);
+  // }
   
   boot() {
     this.tabGroup.open();
