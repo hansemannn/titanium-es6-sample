@@ -4,7 +4,7 @@ Playing around with some ES6+ in Appcelerator Titanium.
 
 ## Requirements
 
-- Titanium SDK 7.1.0+ (Q1/2018 or `ti sdk install -b master` today)
+- Titanium SDK 7.1.0+
 
 ## Demos
 
