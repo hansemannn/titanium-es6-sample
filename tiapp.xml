@@ -12,6 +12,7 @@
 	<navbar-hidden>false</navbar-hidden>
 	<analytics>true</analytics>
 	<guid>11111111-1111-1111-1111-111111111111</guid>
+	<transpile>true</transpile>
 	<property name="ti.ui.defaultunit" type="string">dp</property>
 	<property name="run-on-main-thread" type="bool">true</property>
 	<ios>
@@ -54,5 +55,5 @@
 		<target device="ipad">true</target>
 		<target device="iphone">true</target>
 	</deployment-targets>
-	<sdk-version>7.1.0.v20180130154803</sdk-version>
+	<sdk-version>7.2.0.GA</sdk-version>
 </ti:app>
